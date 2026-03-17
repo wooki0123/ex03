@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function App() {
-  const [todoId, setTodoId] = useState(4);
+  const lastId = useRef(4);
 
   const [todos, setTodos] = useState([
     { id: 3, text: "공부하기", checked: true },
@@ -12,8 +12,11 @@ function App() {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    setTodos([{ id: todoId, text: form.todo.value, checked: false }, ...todos]);
-    setTodoId(todoId + 1);
+    setTodos([
+      { id: lastId.current, text: form.todo.value, checked: false },
+      ...todos,
+    ]);
+    lastId.current++;
   };
 
   const removeTodo = (selectId) => {
