@@ -4,9 +4,9 @@ function App() {
   const [todoId, setTodoId] = useState(4);
 
   const [todos, setTodos] = useState([
-    { id: 3, text: "공부하기", checked: false },
+    { id: 3, text: "공부하기", checked: true },
     { id: 2, text: "코딩하기", checked: false },
-    { id: 1, text: "운동하기", checked: false },
+    { id: 1, text: "운동하기", checked: true },
   ]);
 
   const handleOnSubmit = (e) => {
@@ -42,6 +42,7 @@ function App() {
               onChange={() => {
                 toggleTodo(todo.id);
               }}
+              checked={todo.checked}
             />
             {JSON.stringify(todo.checked)} / {todo.id} / {todo.text}
             <button onClick={() => removeTodo(todo.id)}>삭제</button>
