@@ -1,20 +1,23 @@
 import { useState } from "react";
 
 function App() {
+  const [todoId, setTodoId] = useState(4);
+
   const [todos, setTodos] = useState([
-    { text: "공부하기", checked: false },
-    { text: "코딩하기", checked: false },
-    { text: "운동하기", checked: false },
+    { id: 3, text: "공부하기", checked: false },
+    { id: 2, text: "코딩하기", checked: false },
+    { id: 1, text: "운동하기", checked: false },
   ]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    setTodos([form.todo.value, ...todos]);
+    setTodos([{ id: todoId, text: form.todo.value, checked: false }, ...todos]);
+    setTodoId(todoId + 1);
   };
 
-  const removeTodo = (selectIndex) => {
-    const filterTodos = todos.filter((_, index) => index !== selectIndex);
+  const removeTodo = (selectId) => {
+    const filterTodos = todos.filter((todo) => todo.id !== selectId);
     setTodos(filterTodos);
   };
   return (
@@ -24,10 +27,12 @@ function App() {
         <button type="submit">등록</button>
       </form>
       <ul>
-        {todos.map((todo, i) => (
-          <li key={i}>
-            {todo}
-            <button onClick={() => removeTodo(i)}></button>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.id}
+            {todo.text}
+            {todo.checked}
+            <button onClick={() => removeTodo(todo.id)}>삭제</button>
           </li>
         ))}
       </ul>
