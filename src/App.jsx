@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 function App() {
-  const [todos, setTodos] = useState(["공부하기", "코딩하기", "운동하기"]);
+  const [todos, setTodos] = useState([
+    { text: "공부하기", checked: false },
+    { text: "코딩하기", checked: false },
+    { text: "운동하기", checked: false },
+  ]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
